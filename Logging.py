@@ -66,21 +66,18 @@ class Logging:
                 createPiRow = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
             except MySQLdb.Error as e:
                 print "Error: %s" %e
-        #If rows returned, update the first row returned. Should only be one.
-        else:
-            #This function only works on a PI...disabling it for testing purposes TODO: Test that get IP works.
-            #ip = get_ip_address('wlan0')
-            ip = "192.168.255.255"
-            try:
-                self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
-                piid = self.cursor.fetchone()[0]
-                # Create new item for the Power On Activity
-                res = self.cursor.execute("""INSERT INTO Activity (ActivationTime, ActivationType, PIID) VALUES (%s, 0, %s);""", (logTime, piid))
-                # Update the pis table with IP address
-                res = self.cursor.execute("UPDATE PIS SET IPAddress = %s, HeartBeat = %s WHERE PIID = %s;",(ip, logTime, piid))
-                print res
-            except MySQLdb.Error as e:
-                print "Error: %s" %e
+        #Then, update the first row returned. Should only be one.
+        ip = self.get_ip_address('wlan0')
+        try:
+            self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
+            piid = self.cursor.fetchone()[0]
+            # Create new item for the Power On Activity
+            res = self.cursor.execute("""INSERT INTO Activity (ActivationTime, ActivationType, PIID) VALUES (%s, 0, %s);""", (logTime, piid))
+            # Update the pis table with IP address
+            res = self.cursor.execute("UPDATE PIS SET IPAddress = %s, HeartBeat = %s WHERE PIID = %s;",(ip, logTime, piid))
+            print res
+        except MySQLdb.Error as e:
+            print "Error: %s" %e
 
     def logHeartbeat(self):
         '''
