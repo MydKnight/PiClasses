@@ -61,7 +61,7 @@ class Logging:
         #If no Rows returned. Create a new row
         if resp == 0:
             #This function only works on a PI...disabling it for testing purposes TODO: Test that get IP works.
-            ip = get_ip_address('wlan0')
+            ip = self.get_ip_address('wlan0')
             #ip = "192.168.255.255"
             try:
                 createPiRow = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
