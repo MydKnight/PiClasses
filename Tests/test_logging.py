@@ -5,7 +5,7 @@ import time
 
 dbConn = Logging.Logging()
 
-#dbConn.logBoot()
+dbConn.logBoot()
 
 #numTimesToRepeat = 5
 #while True:
