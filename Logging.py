@@ -3,8 +3,7 @@ __author__ = 'madsens'
 import MySQLdb
 from uuid import getnode as get_mac
 import socket
-#TODO: fcntl doesnt work on windows. Reenable when testing on PI
-#import fcntl
+import fcntl
 import struct
 import datetime
 import sys
