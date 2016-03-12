@@ -14,7 +14,11 @@ class InfoBeamer:
         '''
         #Attempt to Play the movie at the refrenced endpoint
         try:
-            subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath])
+            #First, Check that the video isnt bigger than 2048x2040. If it is, throw exception.
+            height = subprocess.Popen('mediainfo "/media/usb/BarBrawl/loop.mp4" | grep -E "Width"', stdout=subprocess.PIPE)
+            heightLine = height.stdout.read()
+            print heightLine
+            #subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath])
             print "Starting Movie Loop"
             return
         #If Playing fails, throw exception
