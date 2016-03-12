@@ -1,9 +1,8 @@
 import sys
 sys.path.append("/home/pi/Python/PiClasses")
-#import Logging
-#import time
+import InfoBeamer
 
-#dbConn = Logging.Logging()
+ibVideo = InfoBeamer.InfoBeamer("/media/usb/BarBrawl")
 
 #dbConn.logBoot()
 

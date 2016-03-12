@@ -39,7 +39,6 @@ class Logging:
         #If DB Connection fails, throw exception.
         except MySQLdb.Error as e:
             print "Error: %s" %e
-        myVar = "foo"
 
     def logBoot(self):
         '''
