@@ -2,7 +2,7 @@ import sys
 sys.path.append("/home/pi/Python/PiClasses")
 import InfoBeamer
 
-ibVideo = InfoBeamer.InfoBeamer("/media/usb/BarBrawl")
+ibVideo = InfoBeamer.InfoBeamer("/media/usb0/ShilohLoop")
 
 #dbConn.logBoot()
 
