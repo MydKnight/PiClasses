@@ -14,6 +14,6 @@ while True:
     #if numTimesToRepeat==0:
     #    break
     #else:
-    time.sleep(5)
+    time.sleep(300)
 
 #dbConn.logAccess(55555)
