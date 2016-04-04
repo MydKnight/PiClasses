@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/pi/Python/PiClasses")
+sys.path.append("/home/pi/PiClasses")
 import Logging
 import time
 
