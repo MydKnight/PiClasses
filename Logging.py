@@ -8,8 +8,6 @@ import struct
 import datetime
 import sys
 
-#TODO: Times are off on the logging table. Test log times are accurately reflected.
-
 class Logging:
     'Common base class for all Logs'
     # <editor-fold desc="Global Variables">
@@ -89,9 +87,7 @@ class Logging:
         logTime = datetime.datetime.now()
         logTime = logTime.strftime('%Y-%m-%d %H:%M:%S')
 
-        #This function only works on a PI...disabling it for testing purposes TODO: Test that get IP works.
-        #ip = get_ip_address('wlan0')
-        ip = "192.168.255.255"
+        ip = self.get_ip_address('wlan0')
         try:
             pis = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
             #If no rows returned, create a new row.
@@ -102,7 +98,7 @@ class Logging:
             #Then, get the PI ID to update the activities table.
             self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
             piid = self.cursor.fetchone()[0]
-            # Create new item for the Power On Activity
+            # Create new item for the Heartbeat Activity
             res = self.cursor.execute("""INSERT INTO Activity (ActivationTime, ActivationType, PIID) VALUES (%s, 1, %s);""", (logTime, piid))
             # Update the pis table with IP address
             res = self.cursor.execute("UPDATE PIS SET IPAddress = %s, HeartBeat = %s WHERE PIID = %s;",(ip, logTime, piid))
@@ -148,3 +144,18 @@ class Logging:
             0x8915,  # SIOCGIFADDR
             struct.pack('256s', ifname[:15])
         )[20:24])
+
+    def getAccess (self, rfid):
+        # First, get the pi for this mac address
+        mac = get_mac()
+        self.cursor.execute("SELECT PIID FROM  PIS WHERE MacAddress = %s;",str(mac))
+        piid = self.cursor.fetchone()[0]
+
+        # Then if the RFID isn't an "infinite one" make sure it hasn't dispensed before
+        if (rfid != '0005784121'):
+            # Get Previous activations of this PIID by that RFID
+            self.cursor.execute("SELECT COUNT(ActivityID) FROM  Activity WHERE RFID = %s AND PIID = %s;", (str(rfid), str(piid)))
+            count = self.cursor.fetchone()[0]
+            return count
+        else:
+            return 0
