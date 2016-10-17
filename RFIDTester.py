@@ -2,7 +2,7 @@
 __author__ = 'madsens'
 #Runs the RFID Tester in the lobby. When triggered spins a wheel with sounds.
 
-import time, sys, os
+import time, sys
 sys.path.append("/home/pi/PiClasses")
 import Logging
 import GPIOLib
@@ -17,16 +17,16 @@ while True:    # Runs until break is encountered. We want to set it to break on 
     currentScan = time.time()
     if n == "STOP":
         break  # stops the loop
-    else :
+    else:
         dbConn.logAccess(n)
 
         #Trigger GPIO Pins. Spinner just uses one pin
-        gpio.on([11])
-
+        gpio.off([11])
         time.sleep(1)
 
         #Spinner GPIO Off
-        gpio.off([11])
+        gpio.on([11])
+        time.sleep(1)
 
         #flush keyboard buffer
         sys.stdout.flush();

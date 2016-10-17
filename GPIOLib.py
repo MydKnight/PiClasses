@@ -31,7 +31,7 @@ class GPIOLib:
         :return:
         '''
         for pin in pinArray:
-            GPIO.output(pin, True)
+            GPIO.output(pin, GPIO.HIGH)
             print "Set " + str(pin) + " to On. \n"
 
 
@@ -42,5 +42,5 @@ class GPIOLib:
         :return:
         '''
         for pin in pinArray:
-            GPIO.output(pin, False)
+            GPIO.output(pin, GPIO.LOW)
             print "Set " + str(pin) + " to Off. \n"
