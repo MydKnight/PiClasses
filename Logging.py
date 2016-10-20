@@ -28,6 +28,7 @@ class Logging:
         :return:
         '''
         #Attempt to open a connection to the database
+        # Todo: Cursor should be opened by each function and then closed when finished. This is cleaner resource usage.
         try:
             self.conn = MySQLdb.connect(host=self.host,
                   user= self.un,
