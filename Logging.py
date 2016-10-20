@@ -122,20 +122,26 @@ class Logging:
         #ip = get_ip_address('wlan0')
         ip = "192.168.255.255"
 
-        getPi = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
-        #If no rows returned, create a new row.
-        if getPi == 0:
-            #print "Row not found. Need to create a new entry."
-            create = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
-            print create
+        try:
+            getPi = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
+            #If no rows returned, create a new row.
+            if getPi == 0:
+                #print "Row not found. Need to create a new entry."
+                create = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
+                print create
+        except:
+            print "could not get pi"
 
         #Then Update the Activity table with the RFID Access
         # Get the PI ID
-        self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
-        piid = self.cursor.fetchone()[0]
-        # Try to write access of the pi to a log file
-        update = self.cursor.execute("""INSERT INTO Activity (RFID, ActivationTime, ActivationType, PIID) VALUES (%s, %s, 2, %s);""", (rfid, logTime, piid))
-        print update
+        try:
+            self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
+            piid = self.cursor.fetchone()[0]
+            # Try to write access of the pi to a log file
+            update = self.cursor.execute("""INSERT INTO Activity (RFID, ActivationTime, ActivationType, PIID) VALUES (%s, %s, 2, %s);""", (rfid, logTime, piid))
+            print update
+        except:
+            print "could not update activation"
 
     def get_ip_address(self, ifname):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -148,14 +154,17 @@ class Logging:
     def getAccess (self, rfid):
         # First, get the pi for this mac address
         mac = get_mac()
-        self.cursor.execute("SELECT PIID FROM  PIS WHERE MacAddress = %s;",str(mac))
-        piid = self.cursor.fetchone()[0]
+        try:
+            self.cursor.execute("SELECT PIID FROM  PIS WHERE MacAddress = %s;",str(mac))
+            piid = self.cursor.fetchone()[0]
 
-        # Then if the RFID isn't an "infinite one" make sure it hasn't dispensed before
-        if (rfid != '0005784121'):
-            # Get Previous activations of this PIID by that RFID
-            self.cursor.execute("SELECT COUNT(ActivityID) FROM  Activity WHERE RFID = %s AND PIID = %s;", (str(rfid), str(piid)))
-            count = self.cursor.fetchone()[0]
-            return count
-        else:
+            # Then if the RFID isn't an "infinite one" make sure it hasn't dispensed before
+            if not(rfid == '0005784121' or rfid == '0006648578'):
+                # Get Previous activations of this PIID by that RFID
+                self.cursor.execute("SELECT COUNT(ActivityID) FROM  Activity WHERE RFID = %s AND PIID = %s;", (str(rfid), str(piid)))
+                count = self.cursor.fetchone()[0]
+                return count
+            else:
+                return 0
+        except:
             return 0
