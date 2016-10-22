@@ -1,6 +1,6 @@
 #!/usr/bin/python
 __author__ = 'madsens'
-# Runs Dai Vernon gag. Alternates between a pin to make the hand come out and show cards and a puff of "dust"
+# Runs the Doug Henning Altar effect. When triggered spins a wheel with sounds.
 
 import time, sys
 sys.path.append("/home/pi/PiClasses")
@@ -8,9 +8,9 @@ import Logging
 import GPIOLib
 from termios import tcflush, TCIOFLUSH
 
-#Instantiate Logging and GPIO Classes
+# Instantiate Logging and GPIO Classes
 dbConn = Logging.Logging()
-gpio = GPIOLib.GPIOLib("BOARD", "LOW", [11, 13])
+gpio = GPIOLib.GPIOLib("BOARD", "LOW", [11])
 
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
     n = raw_input("Scanned ID: ")
@@ -20,12 +20,14 @@ while True:    # Runs until break is encountered. We want to set it to break on 
     else:
         dbConn.logAccess(n)
 
-        # Trigger Hand
+        # Trigger GPIO Pins. Henning gag just uses one pin
         gpio.on([11])
-        time.sleep(1)
-        gpio.off([11])
-        time.sleep(15)
+        time.sleep(10)
 
-        #flush keyboard buffer
+        # Spinner GPIO Off
+        gpio.off([11])
+        time.sleep(1)
+
+        # Flush keyboard buffer
         sys.stdout.flush();
         tcflush(sys.stdin, TCIOFLUSH)

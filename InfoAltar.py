@@ -1,6 +1,6 @@
 #!/usr/bin/python
 __author__ = 'madsens'
-#Runs the Informational Altar
+# Runs the Informational Altar
 
 import time, sys, os
 sys.path.append("/home/pi/PiClasses")
@@ -8,7 +8,7 @@ import Logging
 import GPIOLib
 from termios import tcflush, TCIOFLUSH
 
-#Instantiate Logging and GPIO Classes
+# Instantiate Logging and GPIO Classes
 dbConn = Logging.Logging()
 gpio = GPIOLib.GPIOLib("BOARD", "HIGH", [7, 11, 13, 21, 29, 31])
 
@@ -27,35 +27,35 @@ while True:    # Runs until break is encountered. We want to set it to break on 
 
         time.sleep (2)
 
-        # Trigger first element/info bar.
+        # Trigger second element/info bar.
         gpio.on([11])
         time.sleep(6)
         gpio.off([11])
 
         time.sleep(2)
 
-        # Trigger first element/info bar.
+        # Trigger third element/info bar.
         gpio.on([13])
         time.sleep(6)
         gpio.off([13])
 
         time.sleep(2)
 
-        # Trigger first element/info bar.
+        # Trigger fourth element/info bar.
         gpio.on([21])
         time.sleep(6)
         gpio.off([21])
 
         time.sleep(2)
 
-        # Trigger first element/info bar.
+        # Trigger fifth element/info bar.
         gpio.on([29])
         time.sleep(6)
         gpio.off([29])
 
         time.sleep(2)
 
-        # Trigger first element/info bar.
+        # Trigger sixth element/info bar.
         gpio.on([31])
         time.sleep(6)
         gpio.off([31])

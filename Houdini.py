@@ -9,6 +9,7 @@ import time, sys, os, subprocess
 sys.path.append("/home/pi/PiClasses")
 import Logging
 import GPIOLib
+from random import randint
 from termios import tcflush, TCIOFLUSH
 
 #Instantiate Logging and GPIO Classes
@@ -24,10 +25,9 @@ while True:    # Runs until break is encountered. We want to set it to break on 
     if n == "STOP":
         break  # stops the loop
     else :
-        if (gag == "chain"):
-            #Set gag to Crystal Ball
-            gag = "ball"
-
+        gag = randint(1,4)
+        if gag == 1:
+            #Chains
             dbConn.logAccess(n)
 
             # Play Chain Break mp3
@@ -47,14 +47,16 @@ while True:    # Runs until break is encountered. We want to set it to break on 
             #flush keyboard buffer
             sys.stdout.flush();
             tcflush(sys.stdin, TCIOFLUSH)
-        else:
-            #Set gag to Chain
-            gag = "chain"
-
+        elif gag == 2:
+            # Ball
             dbConn.logAccess(n)
 
-            # Play Rosalie Sound Clip - 1000 frames in seems a good number
-            os.system('mpg321 -k 1000 /media/usb0/Assets/Rosabelle\ Believe.mp3 -q &')
+            # Play one of two rosabelle sound clips
+            clip = randint(1,2)
+            if clip == 1:
+                os.system('mpg321 -k 1000 /media/usb0/Assets/1.mp3 -q &')
+            else:
+                os.system('mpg321 -k 1000 /media/usb0/Assets/2.mp3 -q &')
 
             # Trigger GPIO Pins for crystal ball activation
             gpio.on([15])
@@ -66,11 +68,16 @@ while True:    # Runs until break is encountered. We want to set it to break on 
             gpio.on([15])
             time.sleep(1)
             gpio.off([15])
-            subprocess.Popen(['sudo', 'pkill', 'mpg321'])
 
             # flush keyboard buffer
             sys.stdout.flush();
             tcflush(sys.stdin, TCIOFLUSH)
+        elif gag == 3:
+            # Houdini Recording
+            os.system('mpg321 -k 1000 /media/usb0/Assets/3.mp3 -q &')
+        else:
+            # Houdini Obit
+            os.system('mpg321 -k 1000 /media/usb0/Assets/4.mp3 -q &')
 
 '''
 Chain:

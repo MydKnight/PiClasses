@@ -1,4 +1,6 @@
 __author__ = 'madsens'
+# Skeleton Eyes. Simply loops a single eyeball video for output to two screens in front of castle
+
 import sys
 sys.path.append("/home/pi/PiClasses")
 import Logging
@@ -17,11 +19,3 @@ while True:    # Runs until break is encountered. We want to set it to break on 
         break  # stops the loop
     else :
         dbConn.logAccess(n)
-
-        # On Input, Disable Reader
-        os.system("/home/pi/Python/Scripts/disableRFID.sh")
-        Movies.PlayMovie()
-        time.sleep(6)
-        # Reenable reader.
-        os.system("/home/pi/Python/Scripts/enableRFID.sh")
-        Movies.PlayLoop()

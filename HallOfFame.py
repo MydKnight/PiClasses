@@ -4,7 +4,7 @@ __author__ = 'madsens'
 
 import time, sys, os
 sys.path.append("/home/pi/PiClasses")
-import Logging
+import Logging, GPIOLib
 from termios import tcflush, TCIOFLUSH
 from DmxPy import DmxPy
 from random import randint
@@ -12,6 +12,9 @@ from random import randint
 #Instantiate Logging and DMX Classes
 dbConn = Logging.Logging()
 dmx = DmxPy('/dev/ttyUSB0')
+
+# GPIO to trigger power to the Projector
+gpio = GPIOLib.GPIOLib("BOARD", "HIGH", [11])
 
 def standBy():
     offset = 0
@@ -30,9 +33,20 @@ def standBy():
     return
 
 def disco():
+    # Turn on the Projector
+    gpio.on([11])
     time.sleep(5)
 
-    for x in range (0, 40):
+    #Play Music
+    if (n == '0005784121'):
+        # Play My Sharona Sound - If shiloh scans
+        os.system('mpg321 -k 1600 /home/pi/Python/EasterEgg/deadmansparty-live.mp3 -q &')
+        timer = 500
+    else:
+        os.system('mpg321 /media/usb0/Assets/audio1.mp3 -q &')
+        timer = 28
+
+    for x in range (0, timer):
         offset = 0
         for x in range (1,10):
             rndColor = randint(4,255)
@@ -45,6 +59,9 @@ def disco():
 
         dmx.render()
         time.sleep(.5)
+
+    # Projector Off
+    gpio.off([11])
     return
 
 standBy()
