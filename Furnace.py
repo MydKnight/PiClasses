@@ -8,7 +8,7 @@ import time
 from termios import tcflush, TCIOFLUSH
 
 dbConn = Logging.Logging()
-Movies.StartLoop('/media/usb0/Assets')
+Movies.StartLoop('/home/pi/Assets')
 
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
     #Logging.HeartBeat()
@@ -19,13 +19,13 @@ while True:    # Runs until break is encountered. We want to set it to break on 
         break  # stops the loop
     else :
         dbConn.logAccess(n)
+        time.sleep(.5)
 
         # On Input, Disable Reader
         os.system("/home/pi/Python/Scripts/disableRFID.sh")
         print "Playing."
         Movies.PlayMovie()
-        time.sleep(6
-                   )
+        time.sleep(18)
         # Reenable reader.
         os.system("/home/pi/Python/Scripts/enableRFID.sh")
         Movies.PlayLoop()

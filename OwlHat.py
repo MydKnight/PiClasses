@@ -10,7 +10,7 @@ from termios import tcflush, TCIOFLUSH
 
 #Instantiate Logging and GPIO Classes
 dbConn = Logging.Logging()
-gpio = GPIOLib.GPIOLib("BOARD", "HIGH", [11,13])
+gpio = GPIOLib.GPIOLib("BOARD", "LOW", [11,13])
 
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
     n = raw_input("Scanned ID: ")

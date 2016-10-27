@@ -9,7 +9,7 @@ import Movies
 import time
 
 dbConn = Logging.Logging()
-Movies.StartLoop('/media/usb0/Assets')
+Movies.StartLoop('/home/pi/Assets')
 
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
     #Logging.HeartBeat()

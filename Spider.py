@@ -11,7 +11,7 @@ from random import randint
 
 # Instantiate Logging and GPIO Classes (11 - power drill, 13 - Change Polarity)
 dbConn = Logging.Logging()
-gpio = GPIOLib.GPIOLib("BOARD", "HIGH", [11, 13])
+gpio = GPIOLib.GPIOLib("BOARD", "LOW", [11])
 
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
     n = raw_input("Scanned ID: ")
@@ -23,9 +23,9 @@ while True:    # Runs until break is encountered. We want to set it to break on 
 
         # Play Wraith on even n, Wilhelm on odd n
         if (int(n) % 2 == 0):
-            audio = "/media/usb0/Assets/wraith.mp3"
+            audio = "/home/pi/Assets/wraith.mp3"
         else:
-            audio = "/media/usb0/Assets/wilhelm.mp3"
+            audio = "/home/pi/Assets/wilhelm.mp3"
 
         # Trigger GPIO Pins. Need to make a random number of "pulses" with a random number of "micro-pulses" each with a random duration pulse, flipping the "polarity pin" with each micro pulse
         # Play an mp3 during each "pulse"
@@ -35,16 +35,11 @@ while True:    # Runs until break is encountered. We want to set it to break on 
             #Micropulses also random between 4 and 10
             micropulse = randint(6,10)
             for y in range (0, micropulse):
-                if (y % 2 == 0):
-                    gpio.on([13])
-                    gpio.on([11])
-                    time.sleep(.25)
-                    gpio.off([11])
-                else:
-                    gpio.off([13])
-                    gpio.on([11])
-                    time.sleep(.25)
-                    gpio.off([11])
+                gpio.on([11])
+                time.sleep(.15)
+                gpio.off([11])
+                time.sleep(.1)
+
             time.sleep(2)
 
         #flush keyboard buffer

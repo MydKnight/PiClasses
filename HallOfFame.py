@@ -14,14 +14,18 @@ dbConn = Logging.Logging()
 dmx = DmxPy('/dev/ttyUSB0')
 
 # GPIO to trigger power to the Projector
-gpio = GPIOLib.GPIOLib("BOARD", "HIGH", [11])
+gpio = GPIOLib.GPIOLib("BOARD", "LOW", [11,13])
 
 def standBy():
     offset = 0
+
     for x in range(1, 10):
-        rndColor = randint(4, 255)
-        dmx.setChannel(4 + offset, 204)
-        dmx.setChannel(5 + offset, 64)
+        rndRed = randint(4, 255)
+        rndGreen = randint(4, 255)
+        rndBlue = randint(4, 255)
+        dmx.setChannel(1 + offset, rndRed)
+        dmx.setChannel(2 + offset, rndGreen)
+        dmx.setChannel(3 + offset, rndBlue)
         dmx.setChannel(7 + offset, 127)
         dmx.setChannel(8 + offset, 0)
         dmx.setChannel(9 + offset, 0)
@@ -35,33 +39,41 @@ def standBy():
 def disco():
     # Turn on the Projector
     gpio.on([11])
-    time.sleep(5)
+    time.sleep(.1)
+    gpio.off([11])
+    time.sleep(2)
 
     #Play Music
-    if (n == '0005784121'):
-        # Play My Sharona Sound - If shiloh scans
-        os.system('mpg321 -k 1600 /home/pi/Python/EasterEgg/deadmansparty-live.mp3 -q &')
-        timer = 500
+    if (n == '0006701791' or n == '0005785109'):
+        # Play Dead Man's party to make Shiloh Happy
+        print "Shiloh"
+        os.system('mpg321 /home/pi/Assets/deadmansparty-live.mp3 -q &')
+        timer = 250
     else:
-        os.system('mpg321 /media/usb0/Assets/audio1.mp3 -q &')
-        timer = 28
+        print "Standard"
+        os.system('mpg321 /home/pi/Assets/audio1.mp3 -q &')
+        timer = 14
 
     for x in range (0, timer):
         offset = 0
         for x in range (1,10):
             rndColor = randint(4,255)
 
-            dmx.setChannel(8+offset, 222)
+            dmx.setChannel(8+offset, 159)
             dmx.setChannel(7+offset, 255)
             dmx.setChannel(9 + offset, rndColor)
 
             offset += 20
 
         dmx.render()
-        time.sleep(.5)
+        time.sleep(1)
 
     # Projector Off
-    gpio.off([11])
+    gpio.on([13])
+    time.sleep(.1)
+    gpio.off([13])
+    time.sleep(.1)
+
     return
 
 standBy()

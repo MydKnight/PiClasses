@@ -34,7 +34,7 @@ class Logging:
                   user= self.un,
                   passwd=self.pw,
                   db=self.db)
-            self.cursor = self.conn.cursor()
+            # self.cursor = self.conn.cursor()
         #If DB Connection fails, throw exception.
         except MySQLdb.Error as e:
             print "Error: %s" %e
@@ -52,21 +52,28 @@ class Logging:
         logTime = datetime.datetime.now()
         logTime = logTime.strftime('%Y-%m-%d %H:%M:%S')
 
-        #Retrieve any DB rows matching our MAC address
-        resp = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
+        self.conn = MySQLdb.connect(host=self.host,
+                                    user=self.un,
+                                    passwd=self.pw,
+                                    db=self.db)
+        self.cursor = self.conn.cursor()
 
-        #If no Rows returned. Create a new row
-        if resp == 0:
-            #This function only works on a PI...disabling it for testing purposes TODO: Test that get IP works.
-            ip = self.get_ip_address('wlan0')
-            #ip = "192.168.255.255"
-            try:
-                createPiRow = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
-            except MySQLdb.Error as e:
-                print "Error: %s" %e
-        #Then, update the first row returned. Should only be one.
-        ip = self.get_ip_address('wlan0')
+        #Retrieve any DB rows matching our MAC address
         try:
+            resp = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
+
+            #If no Rows returned. Create a new row
+            if resp == 0:
+                #This function only works on a PI...disabling it for testing purposes TODO: Test that get IP works.
+                ip = self.get_ip_address('wlan0')
+                #ip = "192.168.255.255"
+                try:
+                    createPiRow = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
+                except MySQLdb.Error as e:
+                    print "Error: %s" %e
+            #Then, update the first row returned. Should only be one.
+            ip = self.get_ip_address('wlan0')
+
             self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
             piid = self.cursor.fetchone()[0]
             # Create new item for the Power On Activity
@@ -74,8 +81,12 @@ class Logging:
             # Update the pis table with IP address
             res = self.cursor.execute("UPDATE PIS SET IPAddress = %s, HeartBeat = %s WHERE PIID = %s;",(ip, logTime, piid))
             print res
+
         except MySQLdb.Error as e:
-            print "Error: %s" %e
+            print "Error: %s" % e
+
+        # Close the connection
+        self.cursor.close()
 
     def logHeartbeat(self):
         '''
@@ -87,6 +98,13 @@ class Logging:
         #Current Time
         logTime = datetime.datetime.now()
         logTime = logTime.strftime('%Y-%m-%d %H:%M:%S')
+
+        self.conn = MySQLdb.connect(host=self.host,
+                                    user=self.un,
+                                    passwd=self.pw,
+                                    db=self.db)
+
+        self.cursor = self.conn.cursor()
 
         ip = self.get_ip_address('wlan0')
         try:
@@ -105,7 +123,12 @@ class Logging:
             res = self.cursor.execute("UPDATE PIS SET IPAddress = %s, HeartBeat = %s WHERE PIID = %s;",(ip, logTime, piid))
             print "Logging Hearbeat"
         except MySQLdb.Error as e:
+            f = open('/home/pi/errors.txt', 'w')
+            error = str(e)
+            f.write(error)
             print "Error: %s" %e
+
+        self.cursor.close()
 
     def logAccess(self, rfid):
         '''
@@ -123,6 +146,13 @@ class Logging:
         #ip = get_ip_address('wlan0')
         ip = "192.168.255.255"
 
+        self.conn = MySQLdb.connect(host=self.host,
+                                    user=self.un,
+                                    passwd=self.pw,
+                                    db=self.db)
+
+        self.cursor = self.conn.cursor()
+
         try:
             getPi = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
             #If no rows returned, create a new row.
@@ -130,19 +160,21 @@ class Logging:
                 #print "Row not found. Need to create a new entry."
                 create = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
                 print create
-        except:
-            print "could not get pi"
 
-        #Then Update the Activity table with the RFID Access
-        # Get the PI ID
-        try:
+            #Then Update the Activity table with the RFID Access
+            # Get the PI ID
             self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
             piid = self.cursor.fetchone()[0]
             # Try to write access of the pi to a log file
             update = self.cursor.execute("""INSERT INTO Activity (RFID, ActivationTime, ActivationType, PIID) VALUES (%s, %s, 2, %s);""", (rfid, logTime, piid))
             print update
-        except:
-            print "could not update activation"
+        except MySQLdb.Error as e:
+            print e
+            f = open('errors', 'w')
+            error = str(e)
+            f.write(error)
+
+        self.cursor.close()
 
     def get_ip_address(self, ifname):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -155,6 +187,9 @@ class Logging:
     def getAccess (self, rfid):
         # First, get the pi for this mac address
         mac = get_mac()
+
+        self.cursor = self.conn.cursor()
+
         try:
             self.cursor.execute("SELECT PIID FROM  PIS WHERE MacAddress = %s;",str(mac))
             piid = self.cursor.fetchone()[0]
@@ -169,3 +204,5 @@ class Logging:
                 return 0
         except:
             return 0
+
+        self.cursor.close()
