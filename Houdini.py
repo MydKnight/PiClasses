@@ -16,16 +16,16 @@ from termios import tcflush, TCIOFLUSH
 dbConn = Logging.Logging()
 gpio = GPIOLib.GPIOLib("BOARD", "HIGH", [11, 13, 15])
 # Make pin 11 low and 13 to high for antenna to work
-gpio.off([11, 13])
+gpio.off([11])
 
-# gag = 1
+gag = 1
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
     n = raw_input("Scanned ID: ")
     currentScan = time.time()
     if n == "STOP":
         break  # stops the loop
     else :
-        gag = randint(1,4)
+        #gag = randint(1,4)
         if gag == 1:
             #Chains
             dbConn.logAccess(n)

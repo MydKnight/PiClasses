@@ -25,7 +25,7 @@ while True:    # Runs until break is encountered. We want to set it to break on 
         os.system("/home/pi/Python/Scripts/disableRFID.sh")
         print "Playing."
         Movies.PlayMovie()
-        time.sleep(18)
+        time.sleep(25)
         # Reenable reader.
         os.system("/home/pi/Python/Scripts/enableRFID.sh")
         Movies.PlayLoop()

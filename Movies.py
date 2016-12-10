@@ -4,12 +4,14 @@ import socket
 import subprocess
 import os
 
+blackhole = open(os.devnull, 'w')
+
 def PlayMovie ():
     #print ("playing movie")
 
     UDP_IP = "localhost"
     UDP_PORT = 4444
-    MESSAGE = "looper/set:intermission"
+    MESSAGE = "looper/play:intermission.mp4"
 
     sock = socket.socket(socket.AF_INET, # Internet
                  socket.SOCK_DGRAM) # UDP
@@ -19,7 +21,7 @@ def PlayMovie ():
     return
 
 def StartLoop(LoopPath):
-    subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath])
+    subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath], stdout=blackhole)
     #print "Starting Movie Loop"
     return
 
@@ -31,7 +33,7 @@ def StopLoop():
 def PlayLoop ():
     UDP_IP = "localhost"
     UDP_PORT = 4444
-    MESSAGE = "looper/set:loop"
+    MESSAGE = "looper/loop:"
 
     sock = socket.socket(socket.AF_INET, # Internet
                  socket.SOCK_DGRAM) # UDP
