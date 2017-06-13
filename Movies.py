@@ -3,6 +3,7 @@ __author__ = 'shilohmadsen'
 import socket
 import subprocess
 import os
+import logging
 
 blackhole = open(os.devnull, 'w')
 
@@ -21,7 +22,7 @@ def PlayMovie ():
     return
 
 def StartLoop(LoopPath):
-    subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath], stdout=blackhole)
+    subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath], stdin=blackhole, stdout=blackhole, stderr=subprocess.STDOUT)
     #print "Starting Movie Loop"
     return
 

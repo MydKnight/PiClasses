@@ -8,28 +8,26 @@ import time
 from termios import tcflush, TCIOFLUSH
 
 dbConn = Logging.Logging()
-dbConn.logBoot()
-
-Movies.StartLoop('/home/pi/Assets')
+Movies.StartLoop('/home/pi/Python/Assets')
 
 while True:    # Runs until break is encountered. We want to set it to break on a particular ID.
-    # Logging.HeartBeat()
+    #Logging.HeartBeat()
     n = raw_input("Scanned ID: ")
     if n == "STOP":
         Movies.StopLoop()
         #print "Stopping."
         break  # stops the loop
     else :
-        # We're only logging access if there is a connection to the DB. if not, we dont do this.
-        # if dbConn:
-            #dbConn.logAccess(n)
-
+        dbConn.logAccess(n)
         time.sleep(.5)
 
-        # print "Playing."
+        # On Input, Disable Reader
+        os.system("/home/pi/Python/Scripts/disableRFID.sh")
+        print "Playing."
         Movies.PlayMovie()
         time.sleep(25)
-
+        # Reenable reader.
+        os.system("/home/pi/Python/Scripts/enableRFID.sh")
         Movies.PlayLoop()
 
         # flush keyboard buffer

@@ -52,11 +52,15 @@ class Logging:
         logTime = datetime.datetime.now()
         logTime = logTime.strftime('%Y-%m-%d %H:%M:%S')
 
-        self.conn = MySQLdb.connect(host=self.host,
-                                    user=self.un,
-                                    passwd=self.pw,
-                                    db=self.db)
-        self.cursor = self.conn.cursor()
+        try:
+            self.conn = MySQLdb.connect(host=self.host,
+                                        user=self.un,
+                                        passwd=self.pw,
+                                        db=self.db)
+            self.cursor = self.conn.cursor()
+
+        except MySQLdb.Error as e:
+            print "Error: %s" % e
 
         #Retrieve any DB rows matching our MAC address
         try:
@@ -143,38 +147,43 @@ class Logging:
         logTime = logTime.strftime('%Y-%m-%d %H:%M:%S')
 
         #This function only works on a PI...disabling it for testing purposes TODO: Test that get IP works.
-        #ip = get_ip_address('wlan0')
-        ip = "192.168.255.255"
-
-        self.conn = MySQLdb.connect(host=self.host,
-                                    user=self.un,
-                                    passwd=self.pw,
-                                    db=self.db)
-
-        self.cursor = self.conn.cursor()
+        ip = self.get_ip_address('wlan0')
+        #ip = "192.168.255.255"
 
         try:
-            getPi = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;",str(mac))
-            #If no rows returned, create a new row.
+            self.conn = MySQLdb.connect(host=self.host,
+                                        user=self.un,
+                                        passwd=self.pw,
+                                        db=self.db)
+
+            self.cursor = self.conn.cursor()
+
+            getPi = self.cursor.execute("SELECT * FROM  PIS WHERE MacAddress = %s;", str(mac))
+            # If no rows returned, create a new row.
             if getPi == 0:
-                #print "Row not found. Need to create a new entry."
-                create = self.cursor.execute("INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",(logTime,str(ip), str(mac)))
+                # print "Row not found. Need to create a new entry."
+                create = self.cursor.execute(
+                    "INSERT INTO PIS (Status, InstallDate, IPAddress, MacAddress) VALUES (1,%s,%s, %s);",
+                    (logTime, str(ip), str(mac)))
                 print create
 
-            #Then Update the Activity table with the RFID Access
+            # Then Update the Activity table with the RFID Access
             # Get the PI ID
-            self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;",str(mac))
+            self.cursor.execute("SELECT PIID FROM PIS WHERE MacAddress = %s;", str(mac))
             piid = self.cursor.fetchone()[0]
             # Try to write access of the pi to a log file
-            update = self.cursor.execute("""INSERT INTO Activity (RFID, ActivationTime, ActivationType, PIID) VALUES (%s, %s, 2, %s);""", (rfid, logTime, piid))
+            update = self.cursor.execute(
+                """INSERT INTO Activity (RFID, ActivationTime, ActivationType, PIID) VALUES (%s, %s, 2, %s);""",
+                (rfid, logTime, piid))
             print update
+
+            self.cursor.close()
+
         except MySQLdb.Error as e:
             print e
             f = open('errors', 'w')
             error = str(e)
             f.write(error)
-
-        self.cursor.close()
 
     def get_ip_address(self, ifname):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
