@@ -5,15 +5,13 @@ import time
 
 dbConn = Logging.Logging()
 
-dbConn.logBoot()
+#dbConn.logBoot()
 
 #numTimesToRepeat = 5
 while True:
-    dbConn.logHeartbeat()
+    #dbConn.logHeartbeat()
     #numTimesToRepeat -= 1
     #if numTimesToRepeat==0:
     #    break
     #else:
-    time.sleep(300)
-
-#dbConn.logAccess(55555)
+    dbConn.getAccess(3333)
