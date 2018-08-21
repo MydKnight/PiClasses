@@ -1,0 +1,1 @@
+[![Build status](https://shilohmadsen.visualstudio.com/Halloween%202018%20-%20Murder%20Mansion/_apis/build/status/Halloween%202018%20-%20Murder%20Mansion-CI?branch=Halloween2018)](https://shilohmadsen.visualstudio.com/Halloween%202018%20-%20Murder%20Mansion/_build/latest?definitionId=3&branch=Halloween2018)]
