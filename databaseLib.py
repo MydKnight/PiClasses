@@ -1,11 +1,8 @@
-import logging
-import logging.handlers
-import sys
-
-import MySQLdb
-import yaml
-
 import Logger
+import MySQLdb
+import logging
+import sys
+import yaml
 
 # Set Up Logging
 stdout_logger = logging.getLogger('DBOUT')
