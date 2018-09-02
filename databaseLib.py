@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 
 import MySQLdb
@@ -18,6 +19,7 @@ sys.stderr = sl
 
 class DBConn(object):
     def __init__(self):
+        print os.getcwd()
         with open("configs.yml", 'r') as ymlfile:
             cfg = yaml.load(ymlfile)
         _host = cfg['mysql']['host']

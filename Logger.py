@@ -1,6 +1,5 @@
 import logging
 
-
 class StreamToLogger(object):
     """
     Fake file-like stream object that redirects writes to a logger instance.
@@ -19,7 +18,7 @@ class StreamToLogger(object):
 logging.basicConfig(
     level=logging.DEBUG,
     # format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
-    format='{"Time": %(asctime)s, "Level": %(levelname)s, "Name": %(name)s, "Message": %(message)s}',
-    filename="/home/pi/Python/Logs/out.log",
+    format='%(asctime)s||%(levelname)s||%(name)s||%(message)s',
+    filename="/home/pi/Python/Logs/Data.log",
     filemode='a'
 )

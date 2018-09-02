@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always">
     <serverData>
+      <paths name="DoorPi">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="pi@192.168.200.155:22">
         <serverdata>
           <mappings>
