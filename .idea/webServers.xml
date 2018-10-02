@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="03d96084-0c42-4122-8511-3abce1b4e0cd" name="GeigerCounter - Home" url="http://192.168.200.196">
+        <fileTransfer host="192.168.200.196" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="c5ffbd68-3ca8-4ef4-98dd-1c98c36fcd39" name="Trixie - Home" url="http://192.168.200.195">
+        <fileTransfer host="192.168.200.195" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="86cf5a58-0b15-40b9-9055-ae188176b65e" name="Furnace - Castle" url="http://192.168.40.131">
+        <fileTransfer host="192.168.40.131" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="fd5f7b5e-bd8a-4d17-b47d-6c6bcceaa10e" name="Furnace - Home" url="http://192.168.200.209">
+        <fileTransfer host="192.168.200.209" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="0a76ba2e-7783-4985-9ad0-9594e7a1f0ff" name="HallCore - Home" url="http://192.168.200.114">
+        <fileTransfer host="192.168.200.114" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="82449fbd-1923-4ffe-a88e-349f434587a4" name="Trixie - Castle" url="http://192.168.40.191">
+        <fileTransfer host="192.168.40.191" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="b653aaa7-7886-4233-a808-377cf88a3b69" name="HallCore - Castle" url="http://192.168.40.184">
+        <fileTransfer host="192.168.40.184" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="abcd537e-27e7-4a4b-81b9-27c7780d0c26" name="LaraRadio - Home" url="http://192.168.200.121">
+        <fileTransfer host="192.168.200.121" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="5ef7fd06-cd3f-4477-8a7d-efe5090c8092" name="ICLadies" url="http://192.168.200.236">
+        <fileTransfer host="192.168.200.236" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="c4c99cce-769b-4b67-8c24-ad20ce6ea1ad" name="Ant Head - Castle" url="http://192.168.40.123">
+        <fileTransfer host="192.168.40.123" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="7f552c4e-7b8b-457c-961a-78209935b54f" name="Palace Bar - Castle" url="http://192.168.40.234">
+        <fileTransfer host="192.168.40.234" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="35a6605b-f79e-4771-bc5f-6d3a9d2e55cf" name="Main Men - Castle" url="http://192.168.40.157">
+        <fileTransfer host="192.168.40.157" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="e54250e5-ad53-4962-89d3-f799d5b41c5d" name="Main Ladies" url="http://192.168.40.176">
+        <fileTransfer host="192.168.40.176" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="678e513c-c693-496a-9fa8-df98d55a6f18" name="IC Ladies - Castle" url="http://192.168.40.130">
+        <fileTransfer host="192.168.40.130" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="93cd0380-6976-4b75-a4ae-b5f3dc116061" name="IC Mens - Castle" url="http://192.168.40.252">
+        <fileTransfer host="192.168.40.252" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="1510c0c8-a540-4edf-8524-927f618e2c61" name="Stanchions - Castle" url="http://192.168.40.171">
+        <fileTransfer host="192.168.40.171" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="380e634b-c695-47fa-bc1e-61c6e4109c03" name="Robot Voice - Castle" url="http://192.168.40.89">
+        <fileTransfer host="192.168.40.89" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="f8c7c24f-6b85-41e0-86bc-b11e77405f8c" name="Geiger Counter - Castle" url="http://192.168.40.251">
+        <fileTransfer host="192.168.40.251" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="05c2c6d7-a387-4bc4-a1e2-1a306b748032" name="ET Communicator" url="http://192.168.40.3">
+        <fileTransfer host="192.168.40.3" port="22" rootFolder="/home/pi/Python" accessType="SFTP" username="pi" password="dfd8dfcbdfd9dfdadfc8dfcfdfd8dfd8dfd3">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

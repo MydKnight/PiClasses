@@ -7,8 +7,8 @@ from ISStreamer.Streamer import Streamer
 # Initial State settings
 BUCKET_NAME = ":computer: Processes"
 BUCKET_KEY = "pr1208"
-ACCESS_KEY = "PLACE YOUR INITIAL STATE ACCESS KEY HERE"
-PROCESS_NAME = "PLACE THE NAME OF YOUR PROCESS HERE"
+ACCESS_KEY = "ibegrAmoZM9X8QQQY3j4BDA0FdZXGSqe"
+PROCESS_NAME = "Stanchions.py"
 # Set the time between checks
 MINUTES_BETWEEN_READS = 15
 # ---------------------------------

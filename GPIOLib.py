@@ -8,7 +8,7 @@ class GPIOLib:
 
     # </editor-fold>
 
-    def __init__(self, boardType, pinState, pins = []):
+    def __init__(self, boardType, pinState, pins = [], inOut="out"):
         '''
         :param type: GPIO pinout type (BOARD or BCM)
         :param state: Whether the pins are initialized HIGH or LOW
@@ -22,7 +22,10 @@ class GPIOLib:
             GPIO.setmode(GPIO.BCM)
 
         for pin in pins:
-            GPIO.setup(pin, GPIO.OUT, initial=GPIO.HIGH) if pinState == "HIGH" else GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
+            if inOut == "out":
+                GPIO.setup(pin, GPIO.OUT, initial=GPIO.HIGH) if pinState == "HIGH" else GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
+            else:
+                GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     def on (self, pinArray):
         '''
