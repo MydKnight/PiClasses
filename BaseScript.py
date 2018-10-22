@@ -1,7 +1,7 @@
 import sys
 
 sys.path.insert(0, '/home/pi/Python')
-import time, sys, os, Logger, logging, glob, subprocess, random
+import time, sys, os, Logger, logging
 from termios import tcflush, TCIOFLUSH
 
 # Add Logging Code
@@ -17,9 +17,6 @@ sys.stderr = sl
 # Log Bootup
 stdout_logger.info("Bootup")
 
-# Trixies Lines
-TrixieLines = glob.glob(os.path.join('/home/pi/Python/2018/Assets', '*.mp3'))
-
 # Listen for Scan
 while True:  # Runs until break is encountered. We want to set it to break on a particular ID.
     n = raw_input("Scanned ID: ")
@@ -28,10 +25,6 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
         break  # stops the loop
     else:
         stdout_logger.info("Activation||" + n)
-
-        # Play Audio Trigger
-        player = subprocess.Popen(['mpg321', random.choice(TrixieLines)])
-        player.wait()
 
         # flush keyboard buffer
         sys.stdout.flush();

@@ -1,5 +1,9 @@
 # One more test
-import serial, sys, time
+import Logger
+import logging
+import os
+import serial
+import sys
 
 DMXOPEN = chr(126)
 DMXCLOSE = chr(231)
@@ -7,6 +11,17 @@ DMXINTENSITY = chr(6) + chr(1) + chr(2)
 DMXINIT1 = chr(03) + chr(02) + chr(0) + chr(0) + chr(0)
 DMXINIT2 = chr(10) + chr(02) + chr(0) + chr(0) + chr(0)
 
+# Add Logging Code
+script = os.path.basename(__file__)
+stdout_logger = logging.getLogger(script + '_Out')
+sl = Logger.StreamToLogger(stdout_logger, logging.INFO)
+# sys.stdout = sl #For Headless Operations
+
+stderr_logger = logging.getLogger(script + '_Err')
+sl = Logger.StreamToLogger(stderr_logger, logging.ERROR)
+
+
+# sys.stderr = sl
 
 class DmxPy:
     def __init__(self, serialPort):

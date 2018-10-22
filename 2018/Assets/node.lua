@@ -1,22 +1,16 @@
 --[[
-
 Alternativ intermission code with better support for multiple
 intermission videos. It's UDP commands use a slighly different
 syntax so you don't have to specify all available videos in
 the code itself:
-
 To start an intermission video, send:
-
    looper/play:video.mp4
-
 where video.mp4 is the intermission video file you want to
 play. While an intermission is running, additional play
 commands will be ignored. If you want to stop an intermission
 and return to the looping video, you can send the following
 command at any time:
-
     looper/loop:
-
 ]]--
 gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 node.alias "looper"

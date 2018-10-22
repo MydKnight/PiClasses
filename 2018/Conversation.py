@@ -3,7 +3,7 @@ import sys
 import vlc
 
 sys.path.insert(0, '/home/pi/Python')
-import os, Logger, logging
+import time, os, Logger, logging
 
 # Add Logging Code
 script = os.path.basename(__file__)
@@ -19,13 +19,12 @@ sl = Logger.StreamToLogger(stderr_logger, logging.ERROR)
 stdout_logger.info("Bootup")
 
 # Play audio on loop
-player = vlc.MediaPlayer("/home/pi/Python/2018/Assets/whispers.mp3")
+player = vlc.MediaPlayer("/home/pi/Python/2018/Assets/conversation.mp3")
 player.play()
 
 # No Scan for this gag. Run if between 4pm and 2am
 while True:  # Runs until break is encountered. We want to set it to break on a particular ID.
     currentDT = datetime.datetime.now()
-    # currentDT.hour
     if currentDT.hour >= 16 or 0 <= currentDT.hour <= 2:
         # Higher volume from 7pm til Midnight
         if 19 <= currentDT.hour <= 24:
@@ -33,7 +32,7 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
         else:
             player.audio_set_volume(50)
 
-        # If Audio ended. Restart.
-        if player.get_state() == vlc.State.Ended:
-            player = vlc.MediaPlayer("/home/pi/Python/2018/Assets/whispers.mp3")
-            player.play()
+        # Wait 5 minutes, then play audio again
+        time.sleep(300)
+        player = vlc.MediaPlayer("/home/pi/Python/2018/Assets/conversation.mp3")
+        player.play()

@@ -1,18 +1,18 @@
 __author__ = 'shilohmadsen'
-#This file sends the UDP commands to localhost to trigger the play movie
+import os
+# This file sends the UDP commands to localhost to trigger the play movie
 import socket
 import subprocess
-import os
-import logging
 
 blackhole = open(os.devnull, 'w')
 
-def PlayMovie ():
+
+def PlayMovie(file="intermission.mp4"):
     #print ("playing movie")
 
     UDP_IP = "localhost"
     UDP_PORT = 4444
-    MESSAGE = "looper/play:intermission.mp4"
+    MESSAGE = "looper/play:%s" % (file)
 
     sock = socket.socket(socket.AF_INET, # Internet
                  socket.SOCK_DGRAM) # UDP
@@ -22,7 +22,10 @@ def PlayMovie ():
     return
 
 def StartLoop(LoopPath):
-    subprocess.Popen(['sudo', '/home/pi/info-beamer-pi/info-beamer', LoopPath], stdin=blackhole, stdout=blackhole, stderr=subprocess.STDOUT)
+    new_env = os.environ.copy()
+    new_env['INFOBEAMER_AUDIO_TARGET'] = 'hdmi'
+    subprocess.Popen(['/home/pi/info-beamer-pi/info-beamer', LoopPath], env=new_env, stdin=blackhole, stdout=blackhole,
+                     stderr=subprocess.STDOUT)
     #print "Starting Movie Loop"
     return
 

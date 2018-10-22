@@ -2,6 +2,34 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always">
     <serverData>
+      <paths name="BlacklightPortraits">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="BloodyMace">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="BodyOutline">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Conversation">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="DoorPi">
         <serverdata>
           <mappings>
@@ -9,7 +37,98 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="pi@192.168.200.155:22">
+      <paths name="FlowerWind">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="GinueaPig">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Invitation">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="KillerReveal">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="KnifeCircle">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="OuijaBase">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="PoisonWine">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="RubyPortrait">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Speakeasy">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Speakeasy-Center">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Speakeasy-Left">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Speakeasy-Right">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="UrbanSlums">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="WhisperingWall">
         <serverdata>
           <mappings>
             <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />

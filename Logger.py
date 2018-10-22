@@ -17,7 +17,6 @@ class StreamToLogger(object):
 
 logging.basicConfig(
     level=logging.DEBUG,
-    # format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
     format='%(asctime)s||%(levelname)s||%(name)s||%(message)s',
     filename="/home/pi/Python/Logs/Data.log",
     filemode='a'
