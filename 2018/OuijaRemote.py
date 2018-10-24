@@ -29,11 +29,6 @@ def get_ip_address(ifname):
 UDP_IP = str(get_ip_address('wlan0'))
 UDP_PORT = 5005
 
-# UDP ports for sending to "OuijaBase"
-UDP_IP = ["192.168.40.152"]
-UDP_PORT = 5005
-MESSAGE = "Hello, World!"
-
 sock = socket.socket(socket.AF_INET,  # Internet
                      socket.SOCK_DGRAM)  # UDP
 sock.bind((UDP_IP, UDP_PORT))

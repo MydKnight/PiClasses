@@ -1,7 +1,7 @@
 import sys
 
 sys.path.insert(0, '/home/pi/Python')
-import sys, os, Logger, logging, databaseLib, socket, random, time
+import sys, os, Logger, logging, databaseLib, socket, random, time, fcntl, struct
 from termios import tcflush, TCIOFLUSH
 
 # Add Logging Code
@@ -23,6 +23,24 @@ conn = databaseLib.DBConn()
 UDP_IP = ["192.168.40.45"]
 UDP_PORT = 5005
 MESSAGE = "Hello, World!"
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+
+# UDP Ports for listening for "OuijaRemote
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', ifname[:15]))[20:24])
+
+
+UDP_IP = str(get_ip_address('wlan0'))
+UDP_PORT = 5005
+
+sock2 = socket.socket(socket.AF_INET,  # Internet
+                      socket.SOCK_DGRAM)  # UDP
+sock2.bind((UDP_IP, UDP_PORT))
 
 NamedPhrases = [
     "%s did it",
@@ -98,11 +116,10 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
         print (message)
 
         # Send Message to Ouija-Remote
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.sendto(message, (UDP_IP, UDP_PORT))
 
         # Wait for response from remote
-        data, addr = sock.recvfrom(1024)  # buffer size is 1024 bytes
+        data, addr = sock2.recvfrom(1024)  # buffer size is 1024 bytes
         while True:
             if data:
                 break
