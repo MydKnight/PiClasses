@@ -96,6 +96,8 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
         message = processSpaces(message)
         message = processDoubleLetter(message)
 
+        print (message)
+
         # Send Message to Ouija-Remote
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         for IP in UDP_IP:
