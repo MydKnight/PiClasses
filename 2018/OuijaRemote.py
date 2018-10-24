@@ -34,7 +34,7 @@ sock = socket.socket(socket.AF_INET,  # Internet
 sock.bind((UDP_IP_LOCAL, UDP_PORT))
 
 # UDP ports for sending to "OuijaBase"
-UDP_IP_REMOTE = ["192.168.40.152"]
+UDP_IP_REMOTE = "192.168.40.152"
 sock2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Nonstop loop listening for serial input

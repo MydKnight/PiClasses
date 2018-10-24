@@ -22,7 +22,6 @@ conn = databaseLib.DBConn()
 # UDP ports for sending to "OuijaRemote"
 UDP_IP_REMOTE = "192.168.40.45"
 UDP_PORT = 5005
-MESSAGE = "Hello, World!"
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 
@@ -36,8 +35,6 @@ def get_ip_address(ifname):
 
 
 UDP_IP_LOCAL = str(get_ip_address('wlan0'))
-UDP_PORT = 5005
-
 sock2 = socket.socket(socket.AF_INET,  # Internet
                       socket.SOCK_DGRAM)  # UDP
 sock2.bind((UDP_IP_LOCAL, UDP_PORT))
