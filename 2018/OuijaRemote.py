@@ -33,7 +33,11 @@ sock = socket.socket(socket.AF_INET,  # Internet
                      socket.SOCK_DGRAM)  # UDP
 sock.bind((UDP_IP, UDP_PORT))
 
-# Set up post to other IP
+# UDP ports for sending to "OuijaBase"
+UDP_IP = ["192.168.40.152"]
+UDP_PORT = 5005
+MESSAGE = "Hello, World!"
+sock2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Nonstop loop listening for serial input
 while True:
@@ -56,5 +60,4 @@ while True:
         ouijaComm.write('!')
 
         # Once location responds, loop has finished. Inform Ouija-Base
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock.sendto('Done', (UDP_IP, UDP_PORT))
+        sock2.sendto('Done', (UDP_IP, UDP_PORT))
