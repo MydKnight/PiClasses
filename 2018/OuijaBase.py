@@ -1,7 +1,7 @@
 import sys
 
 sys.path.insert(0, '/home/pi/Python')
-import time, sys, os, Logger, logging, databaseLib, socket, random
+import sys, os, Logger, logging, databaseLib, socket, random, time
 from termios import tcflush, TCIOFLUSH
 
 # Add Logging Code
@@ -19,8 +19,8 @@ stdout_logger.info("Bootup")
 
 conn = databaseLib.DBConn()
 
-# UDP ports for sending to "Windows"
-UDP_IP = ["192.168.200.179"]
+# UDP ports for sending to "OuijaRemote"
+UDP_IP = ["192.168.40.45"]
 UDP_PORT = 5005
 MESSAGE = "Hello, World!"
 
@@ -78,7 +78,6 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
     else:
         stdout_logger.info("Activation||" + n)
         # Lookup User
-        fName = "None"
         try:
             res = conn.cursor.execute("SELECT FirstName FROM Members WHERE RFID = %s" % (int(n)))
             fName = conn.cursor.fetchone()
@@ -86,7 +85,7 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
             stderr_logger.log(logging.ERROR, "No Connection to DB.")
 
         # Construct Phrase/Select from list
-        if fName != "None":
+        if fName is not None:
             message = random.choice(NamedPhrases)
             message = (message % (fName))
         else:
@@ -100,10 +99,16 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
 
         # Send Message to Ouija-Remote
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        for IP in UDP_IP:
-            sock.sendto(message, (IP, UDP_PORT))
+        sock.sendto(message, (UDP_IP, UDP_PORT))
 
         # Wait for response from remote
+        data, addr = sock.recvfrom(1024)  # buffer size is 1024 bytes
+        while True:
+            if data:
+                break
+            else:
+                print "Waiting..."
+                time.sleep(1)
 
         # flush keyboard buffer
         sys.stdout.flush();
