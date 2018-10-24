@@ -20,7 +20,7 @@ stdout_logger.info("Bootup")
 conn = databaseLib.DBConn()
 
 # UDP ports for sending to "OuijaRemote"
-UDP_IP_REMOTE = ["192.168.40.45"]
+UDP_IP_REMOTE = "192.168.40.45"
 UDP_PORT = 5005
 MESSAGE = "Hello, World!"
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
