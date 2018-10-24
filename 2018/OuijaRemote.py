@@ -14,7 +14,7 @@ sl = Logger.StreamToLogger(stderr_logger, logging.ERROR)
 # sys.stderr = sl
 
 # Setup Serial
-oujaComm = serial.Serial('/dev/ttyACM0', 115200)
+ouijaComm = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
 
 
 # Set up UDP Listener
@@ -33,6 +33,8 @@ sock = socket.socket(socket.AF_INET,  # Internet
                      socket.SOCK_DGRAM)  # UDP
 sock.bind((UDP_IP, UDP_PORT))
 
+# Set up post to other IP
+
 # Nonstop loop listening for serial input
 while True:
     # Listen for serial communicattion
@@ -41,7 +43,14 @@ while True:
         print "received message:", data
 
         # Parse out file to type and send via serial to the Ouija
+        ouijaComm.write(data)
 
         # Begin loop of testing for location
+        loc = ''
+        while loc == '':
+            ouijaComm.write('@')
+            loc = ouijaComm.read(10)
+            print (loc)
 
+        print ("out of loop")
         # Once location responds, loop has finished. Inform Ouija-Base
