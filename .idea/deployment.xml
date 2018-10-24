@@ -51,6 +51,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="HughWelcome">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Python" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Invitation">
         <serverdata>
           <mappings>

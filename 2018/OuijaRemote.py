@@ -1,7 +1,7 @@
 import sys
 
 sys.path.insert(0, '/home/pi/Python')
-import os, Logger, logging, serial, time, socket, struct, fcntl
+import os, Logger, logging, serial, socket, struct, fcntl
 
 # Add Logging Code
 script = os.path.basename(__file__)
@@ -35,18 +35,13 @@ sock.bind((UDP_IP, UDP_PORT))
 
 # Nonstop loop listening for serial input
 while True:
-    data = raw_input("Scanned ID: ")
-
+    # Listen for serial communicattion
+    data, addr = sock.recvfrom(1024)  # buffer size is 1024 bytes
     if data:
-        # Lookup User
+        print "received message:", data
 
-        # Construct Phrase/Select from list
+        # Parse out file to type and send via serial to the Ouija
 
-        # Send Message to Aurduino
-        oujaComm.write(data)
+        # Begin loop of testing for location
 
-        # Our movement is slow. Timeout of 30 seconds
-        time.sleep(30)
-
-    else:
-        print "bad data recieved"
+        # Once location responds, loop has finished. Inform Ouija-Base
