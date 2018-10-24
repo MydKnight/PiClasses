@@ -53,4 +53,5 @@ while True:
             print (loc)
 
         print ("out of loop")
+        ouijaComm.write('!')
         # Once location responds, loop has finished. Inform Ouija-Base
