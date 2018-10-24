@@ -20,7 +20,7 @@ stdout_logger.info("Bootup")
 conn = databaseLib.DBConn()
 
 # UDP ports for sending to "OuijaRemote"
-UDP_IP = ["192.168.40.45"]
+UDP_IP_REMOTE = ["192.168.40.45"]
 UDP_PORT = 5005
 MESSAGE = "Hello, World!"
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -35,12 +35,12 @@ def get_ip_address(ifname):
         struct.pack('256s', ifname[:15]))[20:24])
 
 
-UDP_IP = str(get_ip_address('wlan0'))
+UDP_IP_LOCAL = str(get_ip_address('wlan0'))
 UDP_PORT = 5005
 
 sock2 = socket.socket(socket.AF_INET,  # Internet
                       socket.SOCK_DGRAM)  # UDP
-sock2.bind((UDP_IP, UDP_PORT))
+sock2.bind((UDP_IP_LOCAL, UDP_PORT))
 
 NamedPhrases = [
     "%s did it",
@@ -116,7 +116,7 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
         print (message)
 
         # Send Message to Ouija-Remote
-        sock.sendto(message, (UDP_IP, UDP_PORT))
+        sock.sendto(message, (UDP_IP_REMOTE, UDP_PORT))
 
         # Wait for response from remote
         data, addr = sock2.recvfrom(1024)  # buffer size is 1024 bytes

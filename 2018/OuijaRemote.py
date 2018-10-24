@@ -26,15 +26,15 @@ def get_ip_address(ifname):
         struct.pack('256s', ifname[:15]))[20:24])
 
 
-UDP_IP = str(get_ip_address('wlan0'))
+UDP_IP_LOCAL = str(get_ip_address('wlan0'))
 UDP_PORT = 5005
 
 sock = socket.socket(socket.AF_INET,  # Internet
                      socket.SOCK_DGRAM)  # UDP
-sock.bind((UDP_IP, UDP_PORT))
+sock.bind((UDP_IP_LOCAL, UDP_PORT))
 
 # UDP ports for sending to "OuijaBase"
-UDP_IP = ["192.168.40.152"]
+UDP_IP_REMOTE = ["192.168.40.152"]
 UDP_PORT = 5005
 MESSAGE = "Hello, World!"
 sock2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -60,4 +60,4 @@ while True:
         ouijaComm.write('!')
 
         # Once location responds, loop has finished. Inform Ouija-Base
-        sock2.sendto('Done', (UDP_IP, UDP_PORT))
+        sock2.sendto('Done', (UDP_IP_REMOTE, UDP_PORT))
