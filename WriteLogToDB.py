@@ -70,7 +70,7 @@ def main():
         # '/home/pi/Python/Logs/Archive/Data_{date:%Y-%m-%d %H:%M:%S}.txt'.format(date=datetime.datetime.now()))
 
         # Clear File
-        open('file.txt', 'w').close()
+        open('/home/pi/Python/Logs/Data.log', 'w').close()
 
         errors = insertLog(conn, piID, dataToInsert)
 
