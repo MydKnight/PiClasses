@@ -119,6 +119,7 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
         data, addr = sock2.recvfrom(1024)  # buffer size is 1024 bytes
         while True:
             if data:
+                time.sleep(40)
                 break
             else:
                 print "Waiting..."

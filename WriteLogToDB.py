@@ -65,8 +65,12 @@ def main():
             dataToInsert = f.read()
 
         # Rename log file - Any script writing to the log file will create a new one once we rename the old one.
-        os.rename('/home/pi/Python/Logs/Data.log',
-                  '/home/pi/Python/Logs/Archive/Data_{date:%Y-%m-%d %H:%M:%S}.txt'.format(date=datetime.datetime.now()))
+        # Rename causes file creation errors because the scripts won't make a new file unless i call the constructor again. Going to clear the file insetad
+        # os.rename('/home/pi/Python/Logs/Data.log',
+        # '/home/pi/Python/Logs/Archive/Data_{date:%Y-%m-%d %H:%M:%S}.txt'.format(date=datetime.datetime.now()))
+
+        # Clear File
+        open('file.txt', 'w').close()
 
         errors = insertLog(conn, piID, dataToInsert)
 
