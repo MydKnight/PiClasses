@@ -126,5 +126,8 @@ while True:  # Runs until break is encountered. We want to set it to break on a 
                 time.sleep(1)
 
         # flush keyboard buffer
-        sys.stdout.flush();
-        tcflush(sys.stdin, TCIOFLUSH)
+        try:
+            sys.stdout.flush();
+            tcflush(sys.stdin, TCIOFLUSH)
+        except:
+            stderr_logger.log(logging.ERROR, "Unable to flush buffer")
